@@ -1,0 +1,16 @@
+# v1.x DatabaseClaim (namespace-scoped)
+# This is how we used to create claims in v1.x
+apiVersion: aws.platform.tekanaid.com/v1alpha1
+kind: DatabaseClaim
+metadata:
+  name: production-db
+  namespace: production  # Claims are namespace-scoped
+spec:
+  parameters:
+    storageGB: 50
+    tableType: "transactional"
+    environment: "production"
+  writeConnectionSecretsToRef:
+    name: production-db-connection
+    namespace: production
+  # This creates a CLUSTER-SCOPED XR behind the scenes!
